@@ -1,0 +1,22 @@
+---
+- name: Installing python-boto3 packages using apt
+  become: true
+  apt:
+    pkg: "python-boto3"
+    update_cache: yes
+    state: latest
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Installing python-boto3 packages using yum
+  become: true
+  yum:
+    pkg: "python-boto3"
+    update_cache: yes
+    state: latest
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Installing python-boto3 packages using pacman
+  pacman:
+    name: "python-boto3"
+    state: present
+  when: ansible_distribution == 'MacOSX'
